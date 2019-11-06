@@ -11,8 +11,8 @@ public class Uporabnik {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String ime;
-    private String priimek;
+    private String name;
+    private String surname;
     private String email;
     private String password;
     @Temporal(TemporalType.DATE)
@@ -28,20 +28,20 @@ public class Uporabnik {
         this.id = id;
     }
 
-    public String getIme() {
-        return ime;
+    public String getName() {
+        return name;
     }
 
-    public void setIme(String ime) {
-        this.ime = ime;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPriimek() {
-        return priimek;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setPriimek(String priimek) {
-        this.priimek = priimek;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {
