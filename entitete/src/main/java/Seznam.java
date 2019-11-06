@@ -1,11 +1,10 @@
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity(name = "seznam")
 @NamedQueries(value =
         {
-                @NamedQuery(name = "seznam.getAll", query = "SELECT s FROM seznam s")
+                @NamedQuery(name = "seznam.getAll", query = "SELECT o FROM seznam o")
         })
 public class Seznam {
     @Id
@@ -14,6 +13,8 @@ public class Seznam {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    private Integer user_id;
+
     private String list_name;
     @Temporal(TemporalType.DATE)
     private Date created_date;
