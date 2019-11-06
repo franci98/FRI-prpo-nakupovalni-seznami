@@ -15,7 +15,9 @@ public class Uporabnik {
     private String priimek;
     private String email;
     private String password;
+    @Temporal(TemporalType.DATE)
     private Date join_date;
+    @Temporal(TemporalType.DATE)
     private Date last_login;
 
     public Integer getId() {
