@@ -1,3 +1,5 @@
+package si.fri.prpo.nakupovalniseznami.entitete;
+
 import javax.persistence.*;
 import java.util.Date;
 

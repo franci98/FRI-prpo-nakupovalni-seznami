@@ -3,7 +3,9 @@
     <persistence-unit name="nakupovalni-seznami" transaction-type="JTA">
         <jta-data-source>jdbc/NakupovalniSeznamiJDBC</jta-data-source>
 
-        <class>Uporabnik</class>
+        <class>si.fri.prpo.nakupovalniseznami.entitete.Uporabnik</class>
+        <class>si.fri.prpo.nakupovalniseznami.entitete.Seznam</class>
+        <class>si.fri.prpo.nakupovalniseznami.entitete.Izdelek</class>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
