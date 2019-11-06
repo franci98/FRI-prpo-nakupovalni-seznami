@@ -1,5 +1,5 @@
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity(name = "uporabnik")
 @NamedQueries(value =
@@ -15,8 +15,8 @@ public class Uporabnik {
     private String priimek;
     private String email;
     private String password;
-    private LocalDateTime join_date;
-    private LocalDateTime last_login;
+    private Date join_date;
+    private Date last_login;
 
     public Integer getId() {
         return id;
@@ -58,19 +58,19 @@ public class Uporabnik {
         this.password = password;
     }
 
-    public LocalDateTime getJoinDate() {
+    public Date getJoinDate() {
         return join_date;
     }
 
-    public void setJoinDate(LocalDateTime join_date) {
+    public void setJoinDate(Date join_date) {
         this.join_date = join_date;
     }
 
-    public LocalDateTime getLastLogin() {
+    public Date getLastLogin() {
         return last_login;
     }
 
-    public void setLastLogin(LocalDateTime last_login) {
+    public void setLastLogin(Date last_login) {
         this.last_login = last_login;
     }
 }
