@@ -18,9 +18,28 @@ public class UporabnikZrno {
 
     public List<Uporabnik> getAllUsers() {
 
-        List<Uporabnik> uporabniki = em.createNamedQuery("Uporabnik.getAll").getResultList();
+        List<Uporabnik> uporabniki =  em.createNamedQuery("Uporabnik.getAll").getResultList();
 
         return uporabniki;
+    }
+
+    public List<Uporabnik> getByName(String name) {
+
+        List<Uporabnik> uporabniki = em.createNamedQuery("Uporabnik.getByName").setParameter("name", name).getResultList();
+
+        return uporabniki;
+    }
+
+    public List<Uporabnik> getByEmail(String email) {
+
+        List<Uporabnik> uporabniki = em.createNamedQuery("Uporabnik.getByEmail").setParameter("email", email).getResultList();
+
+        return uporabniki;
+    }
+
+    public Uporabnik getLastLogined() {
+
+        return (Uporabnik) em.createNamedQuery("Uporabnik.getLastLogined").getSingleResult();
     }
 
 }
