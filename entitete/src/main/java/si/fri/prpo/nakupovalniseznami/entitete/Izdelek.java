@@ -21,6 +21,11 @@ public class Izdelek {
     @Temporal(TemporalType.DATE)
     private Date created_date;
 
+    @ManyToOne
+    private Seznam list;
+
+    // Getters and Setters
+
     public Integer getId() {
         return id;
     }
@@ -53,4 +58,11 @@ public class Izdelek {
         this.created_date = created_date;
     }
 
+    public Seznam getList() {
+        return list;
+    }
+
+    public void setList(Seznam list) {
+        this.list = list;
+    }
 }

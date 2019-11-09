@@ -10,8 +10,9 @@ import java.util.List;
                 @NamedQuery(name = "Seznam.getAll", query = "SELECT s FROM Seznam s"),
                 @NamedQuery(name = "Seznam.getByName", query = "SELECT s FROM Seznam s WHERE s.name = :name"),
                 @NamedQuery(name = "Seznam.getLastModified", query = "SELECT s FROM Seznam s WHERE s.modified_date=(SELECT MAX(s.modified_date) FROM s)"),
-                @NamedQuery(name = "Seznam.getByUserId", query = "SELECT s FROM Seznam s WHERE s.user_id = :user_id"),
-                @NamedQuery(name = "Seznam.getByCategory", query = "SELECT s FROM Seznam s WHERE s.category_id = (SELECT k.id FROM Kategorija k WHERE k.name LIKE :category_name)")
+                @NamedQuery(name = "Seznam.getByUser", query = "SELECT s FROM Seznam s WHERE s.user = :user"),
+                //@NamedQuery(name = "Seznam.getByCategory", query = "SELECT s FROM Seznam s WHERE s.category_id = (SELECT k.id FROM Kategorija k WHERE k.name LIKE :category_name)")
+                @NamedQuery(name = "Seznam.getByCategory", query = "SELECT s FROM Seznam s WHERE s.category LIKE :category")
         })
 public class Seznam {
     @Id
@@ -30,7 +31,7 @@ public class Seznam {
     @JoinColumn(name = "user_id")
     private Uporabnik user;
 
-    @OneToMany(mappedBy = "seznam")
+    @OneToMany(mappedBy = "list")
     private List<Izdelek> items;
 
     @ManyToMany(cascade = {
@@ -41,7 +42,9 @@ public class Seznam {
             joinColumns = @JoinColumn(name = "list_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<Kategorija> category;
+    private List<Kategorija> categories;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -91,11 +94,11 @@ public class Seznam {
         this.items = items;
     }
 
-    public List<Kategorija> getCategory() {
-        return category;
+    public List<Kategorija> getCategories() {
+        return categories;
     }
 
-    public void setCategory(List<Kategorija> category) {
-        this.category = category;
+    public void setCategories(List<Kategorija> categories) {
+        this.categories = categories;
     }
 }

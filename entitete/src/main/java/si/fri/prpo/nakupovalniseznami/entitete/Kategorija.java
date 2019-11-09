@@ -1,6 +1,7 @@
 package si.fri.prpo.nakupovalniseznami.entitete;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "Kategorija")
 @NamedQueries(value =
@@ -17,6 +18,11 @@ public class Kategorija {
 
     private String name;
     private String description;
+
+    @ManyToMany(mappedBy = "categories")
+    private List<Seznam> lists;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;

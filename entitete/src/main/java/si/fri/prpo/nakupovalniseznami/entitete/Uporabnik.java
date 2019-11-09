@@ -26,8 +26,10 @@ public class Uporabnik {
     @Temporal(TemporalType.DATE)
     private Date last_login;
 
-    @OneToMany(mappedBy = "uporabnik")
-    private List<Seznam> list;
+    @OneToMany(mappedBy = "user")
+    private List<Seznam> lists;
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -83,5 +85,13 @@ public class Uporabnik {
 
     public void setLast_login(Date last_login) {
         this.last_login = last_login;
+    }
+
+    public List<Seznam> getLists() {
+        return lists;
+    }
+
+    public void setLists(List<Seznam> lists) {
+        this.lists = lists;
     }
 }
