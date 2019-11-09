@@ -1,7 +1,8 @@
 package si.fri.prpo.nakupovalniseznami.api;
 
 import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
-import si.fri.prpo.nakupovalniseznami.zrna.UporabnikZrno;
+import si.fri.prpo.nakupovalniseznami.zrna.*;
+import si.fri.prpo.nakupovalniseznami.zrna.IzdelekZrno;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -19,6 +20,12 @@ public class JPAServlet extends HttpServlet {
 
     @Inject
     private UporabnikZrno uporabnikZrno;
+    @Inject
+    private IzdelekZrno izdelekZrno;
+    @Inject
+    private SeznamZrno seznamZrno;
+    @Inject
+    private KategorijaZrno kategorijaZrno;
 
     private static final Logger log = Logger.getLogger(JPAServlet.class.getName());
 
@@ -35,6 +42,18 @@ public class JPAServlet extends HttpServlet {
         // izpis uporabnikov na spletno stran
         writer.append("<br/><br/>Uporabniki:<br/>");
         uporabnikZrno.getAllUsers().stream().forEach(u -> writer.append(u.toString() + "<br/><br/>"));
+
+        // izpis izdelkov na spletno stran
+        writer.append("<br/><br/>izdelki:<br/>");
+        izdelekZrno.getAllItems().stream().forEach(i -> writer.append(i.toString() + "<br/><br/>"));
+
+        // izpis seznamov na spletno stran
+        writer.append("<br/><br/>seznami:<br/>");
+        seznamZrno.getAllLists().stream().forEach(u -> writer.append(u.toString() + "<br/><br/>"));
+
+        // izpis kategorij na spletno stran
+        writer.append("<br/><br/>kategorije:<br/>");
+        kategorijaZrno.getAllCategories().stream().forEach(u -> writer.append(u.toString() + "<br/><br/>"));
 
     }
 }

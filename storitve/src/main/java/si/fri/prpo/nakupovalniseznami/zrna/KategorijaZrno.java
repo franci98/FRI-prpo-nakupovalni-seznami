@@ -16,7 +16,7 @@ public class KategorijaZrno {
     @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
-    public List<Kategorija> getAllItems() {
+    public List<Kategorija> getAllCategories() {
 
         List<Kategorija> kategorije = em.createNamedQuery("Kategorija.getAll").getResultList();
 
