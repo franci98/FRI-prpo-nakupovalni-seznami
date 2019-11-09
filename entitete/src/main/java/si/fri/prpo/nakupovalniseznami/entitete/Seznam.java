@@ -8,7 +8,7 @@ import java.util.Date;
         {
                 @NamedQuery(name = "Seznam.getAll", query = "SELECT s FROM Seznam s"),
                 @NamedQuery(name = "Seznam.getByName", query = "SELECT s FROM Seznam s WHERE s.name = :name"),
-                @NamedQuery(name = "Seznam.getLastModified", query = "SELECT s FROM Seznam s WHERE s.modified=(SELECT MAX(s.modified) FROM s)"),
+                @NamedQuery(name = "Seznam.getLastModified", query = "SELECT s FROM Seznam s WHERE s.modified_date=(SELECT MAX(s.modified_date) FROM s)"),
                 @NamedQuery(name = "Seznam.getByUserId", query = "SELECT s FROM Seznam s WHERE s.user_id = :user_id")
         })
 public class Seznam {
@@ -19,10 +19,10 @@ public class Seznam {
     private String name;
 
     @Temporal(TemporalType.DATE)
-    private Date created;
+    private Date created_date;
 
     @Temporal(TemporalType.DATE)
-    private Date modified;
+    private Date modified_date;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -44,20 +44,20 @@ public class Seznam {
         this.name = name;
     }
 
-    public Date getCreated() {
-        return created;
+    public Date getCreated_date() {
+        return created_date;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setCreated_date(Date created_date) {
+        this.created_date = created_date;
     }
 
-    public Date getModified() {
-        return modified;
+    public Date getModified_date() {
+        return modified_date;
     }
 
-    public void setModified(Date modified) {
-        this.modified = modified;
+    public void setModified_date(Date modified_date) {
+        this.modified_date = modified_date;
     }
 
     public Uporabnik getUser() {
