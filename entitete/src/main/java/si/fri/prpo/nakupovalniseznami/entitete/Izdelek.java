@@ -6,7 +6,10 @@ import java.util.Date;
 @Entity(name = "izdelek")
 @NamedQueries(value =
         {
-                @NamedQuery(name = "izdelek.getAll", query = "SELECT o FROM izdelek o")
+                @NamedQuery(name = "izdelek.getAll", query = "SELECT i FROM Izdelek i"),
+                @NamedQuery(name = "izdelek.getByName", query = "SELECT i FROM Izdelek i WHERE i.name = :name"),
+                @NamedQuery(name = "izdelek.getLastCreated", query = "SELECT i FROM Izdelek i WHERE i.created_date=(SELECT MAX(i.created_date) FROM i)"),
+                @NamedQuery(name = "izdelek.getByDescription", query = "SELECT i FROM Izdelek i WHERE i.description LIKE :description")
         })
 public class Izdelek {
     @Id
@@ -15,7 +18,7 @@ public class Izdelek {
 
     @ManyToOne
     @JoinColumn(name = "list_id")
-    private Integer list_id;
+    private Seznam list;
 
     private String name;
     private String description;
@@ -28,6 +31,14 @@ public class Izdelek {
 
     public void setItem_id(Integer item_id) {
         this.item_id = item_id;
+    }
+
+    public Seznam getList() {
+        return list;
+    }
+
+    public void setList(Seznam list) {
+        this.list = list;
     }
 
     public String getName() {
