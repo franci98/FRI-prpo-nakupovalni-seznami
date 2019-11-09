@@ -21,10 +21,6 @@ public class Izdelek {
     @Temporal(TemporalType.DATE)
     private Date created_date;
 
-    @ManyToOne
-    @JoinColumn(name = "list_id")
-    private Seznam list;
-
     public Integer getId() {
         return id;
     }
@@ -57,11 +53,4 @@ public class Izdelek {
         this.created_date = created_date;
     }
 
-    public Seznam getList() {
-        return list;
-    }
-
-    public void setList(Seznam list) {
-        this.list = list;
-    }
 }

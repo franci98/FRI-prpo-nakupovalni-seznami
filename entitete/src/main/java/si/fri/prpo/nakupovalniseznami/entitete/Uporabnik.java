@@ -2,6 +2,7 @@ package si.fri.prpo.nakupovalniseznami.entitete;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "Uporabnik")
 @NamedQueries(value =
@@ -24,6 +25,9 @@ public class Uporabnik {
     private Date join_date;
     @Temporal(TemporalType.DATE)
     private Date last_login;
+
+    @OneToMany(mappedBy = "uporabnik")
+    private List<Seznam> list;
 
     public Integer getId() {
         return id;

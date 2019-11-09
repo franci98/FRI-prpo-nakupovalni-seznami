@@ -2,6 +2,7 @@ package si.fri.prpo.nakupovalniseznami.entitete;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "Seznam")
 @NamedQueries(value =
@@ -9,7 +10,8 @@ import java.util.Date;
                 @NamedQuery(name = "Seznam.getAll", query = "SELECT s FROM Seznam s"),
                 @NamedQuery(name = "Seznam.getByName", query = "SELECT s FROM Seznam s WHERE s.name = :name"),
                 @NamedQuery(name = "Seznam.getLastModified", query = "SELECT s FROM Seznam s WHERE s.modified_date=(SELECT MAX(s.modified_date) FROM s)"),
-                @NamedQuery(name = "Seznam.getByUserId", query = "SELECT s FROM Seznam s WHERE s.user_id = :user_id")
+                @NamedQuery(name = "Seznam.getByUserId", query = "SELECT s FROM Seznam s WHERE s.user_id = :user_id"),
+                @NamedQuery(name = "Seznam.getByCategory", query = "SELECT s FROM Seznam s WHERE s.category_id = (SELECT k.id FROM Kategorija k WHERE k.name LIKE :category_name)")
         })
 public class Seznam {
     @Id
@@ -27,6 +29,19 @@ public class Seznam {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Uporabnik user;
+
+    @OneToMany(mappedBy = "seznam")
+    private List<Izdelek> items;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "kategorija_seznama",
+            joinColumns = @JoinColumn(name = "list_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Kategorija> category;
 
     public Integer getId() {
         return id;
@@ -66,5 +81,21 @@ public class Seznam {
 
     public void setUser(Uporabnik user) {
         this.user = user;
+    }
+
+    public List<Izdelek> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Izdelek> items) {
+        this.items = items;
+    }
+
+    public List<Kategorija> getCategory() {
+        return category;
+    }
+
+    public void setCategory(List<Kategorija> category) {
+        this.category = category;
     }
 }
