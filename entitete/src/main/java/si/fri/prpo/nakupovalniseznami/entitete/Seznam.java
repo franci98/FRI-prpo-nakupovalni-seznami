@@ -3,55 +3,68 @@ package si.fri.prpo.nakupovalniseznami.entitete;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "seznam")
+@Entity(name = "Seznam")
 @NamedQueries(value =
         {
-                @NamedQuery(name = "seznam.getAll", query = "SELECT o FROM seznam o")
+                @NamedQuery(name = "Seznam.getAll", query = "SELECT s FROM Seznam s"),
+                @NamedQuery(name = "Seznam.getByName", query = "SELECT s FROM Seznam s WHERE s.name = :name"),
+                @NamedQuery(name = "Seznam.getLastModified", query = "SELECT s FROM Seznam s WHERE s.modified=(SELECT MAX(s.modified) FROM s)"),
+                @NamedQuery(name = "Seznam.getByUserId", query = "SELECT s FROM Seznam s WHERE s.user_id = :user_id")
         })
 public class Seznam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer list_id;
+    private Integer id;
+
+    private String name;
+
+    @Temporal(TemporalType.DATE)
+    private Date created;
+
+    @Temporal(TemporalType.DATE)
+    private Date modified;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Integer user_id;
+    private Uporabnik user;
 
-    private String list_name;
-    @Temporal(TemporalType.DATE)
-    private Date created_date;
-    @Temporal(TemporalType.DATE)
-    private Date last_modified;
-
-    public Integer getList_id() {
-        return list_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setList_id(Integer list_id) {
-        this.list_id = list_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getList_name() {
-        return list_name;
+    public String getName() {
+        return name;
     }
 
-    public void setList_name(String list_name) {
-        this.list_name = list_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
-    public Date getLast_modified() {
-        return last_modified;
+    public Date getModified() {
+        return modified;
     }
 
-    public void setLast_modified(Date last_modified) {
-        this.last_modified = last_modified;
+    public void setModified(Date modified) {
+        this.modified = modified;
+    }
+
+    public Uporabnik getUser() {
+        return user;
+    }
+
+    public void setUser(Uporabnik user) {
+        this.user = user;
     }
 }
