@@ -97,6 +97,6 @@ public class Uporabnik {
 
     @Override
     public String toString() {
-        return String.format("%s 5s, %s", this.name, this.surname, this.email);
+        return String.format("%s %s, %s", this.name, this.surname, this.email);
     }
 }
