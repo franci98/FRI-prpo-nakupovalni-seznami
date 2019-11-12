@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity(name = "Uporabnik")
+@Entity
+@Table(name = "public.user")
 @NamedQueries(value =
         {
                 @NamedQuery(name = "Uporabnik.getAll", query = "SELECT u FROM Uporabnik u"),
-                @NamedQuery(name = "Uporabnik.getByName", query = "SELECT u FROM Uporabnik u WHERE u.name = :name"),
-                @NamedQuery(name = "Uporabnik.getLastLogined", query = "SELECT u FROM Uporabnik u WHERE u.last_login=(SELECT MAX(u.last_login) FROM u)"),
-                @NamedQuery(name = "Uporabnik.getByEmail", query = "SELECT u FROM Uporabnik u WHERE u.email = :email")
+
         })
 public class Uporabnik {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Integer id;
 
     private String name;

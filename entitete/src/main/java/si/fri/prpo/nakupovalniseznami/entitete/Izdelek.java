@@ -3,17 +3,16 @@ package si.fri.prpo.nakupovalniseznami.entitete;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "Izdelek")
+@Entity
+@Table(name = "public.item")
 @NamedQueries(value =
         {
                 @NamedQuery(name = "Izdelek.getAll", query = "SELECT i FROM Izdelek i"),
-                @NamedQuery(name = "Izdelek.getByName", query = "SELECT i FROM Izdelek i WHERE i.name = :name"),
-                @NamedQuery(name = "Izdelek.getLastCreated", query = "SELECT i FROM Izdelek i WHERE i.created_date=(SELECT MAX(i.created_date) FROM i)"),
-                @NamedQuery(name = "Izdelek.getByDescription", query = "SELECT i FROM Izdelek i WHERE i.description LIKE :description")
         })
 public class Izdelek {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "item_id")
     private Integer id;
 
     private String name;
@@ -21,7 +20,10 @@ public class Izdelek {
     @Temporal(TemporalType.DATE)
     private Date created_date;
 
+    private boolean checked;
+
     @ManyToOne
+    @JoinColumn(name = "list_id")
     private Seznam list;
 
     // Getters and Setters
