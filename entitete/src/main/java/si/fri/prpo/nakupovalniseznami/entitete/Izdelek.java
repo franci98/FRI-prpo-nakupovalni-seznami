@@ -8,6 +8,8 @@ import java.util.Date;
 @NamedQueries(value =
         {
                 @NamedQuery(name = "Izdelek.getAll", query = "SELECT i FROM Izdelek i"),
+                @NamedQuery(name = "Izdelek.getByName", query = "SELECT i FROM Izdelek i WHERE i.name = :name"),
+                @NamedQuery(name = "Izdelek.getLastCreated", query = "SELECT i FROM Izdelek i WHERE i.created_date=(SELECT MAX(i2.created_date) FROM Izdelek i2)"),
         })
 public class Izdelek {
     @Id
