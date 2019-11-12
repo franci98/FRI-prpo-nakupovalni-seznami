@@ -67,4 +67,9 @@ public class Izdelek {
     public void setList(Seznam list) {
         this.list = list;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s - %s %tF", this.name, this.description, this.created_date);
+    }
 }

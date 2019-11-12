@@ -24,8 +24,6 @@ public class JPAServlet extends HttpServlet {
     private IzdelekZrno izdelekZrno;
     @Inject
     private SeznamZrno seznamZrno;
-    @Inject
-    private KategorijaZrno kategorijaZrno;
 
     private static final Logger log = Logger.getLogger(JPAServlet.class.getName());
 
@@ -50,11 +48,6 @@ public class JPAServlet extends HttpServlet {
         // izpis seznamov na spletno stran
         writer.append("<br/><br/>seznami:<br/>");
         seznamZrno.getAllLists().stream().forEach(u -> writer.append(u.toString() + "<br/><br/>"));
-
-        // izpis kategorij na spletno stran
-        writer.append("<br/><br/>kategorije:<br/>");
-        kategorijaZrno.getAllCategories().stream().forEach(u -> writer.append(u.toString() + "<br/><br/>"));
-
 
         // izpis uporabnikov na spletno stran z criteriaAPI
         writer.append("<br/><br/>Uporabniki z criteriaAPI:<br/>");

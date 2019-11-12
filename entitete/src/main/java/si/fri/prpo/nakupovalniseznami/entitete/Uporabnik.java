@@ -94,4 +94,9 @@ public class Uporabnik {
     public void setLists(List<Seznam> lists) {
         this.lists = lists;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s 5s, %s", this.name, this.surname, this.email);
+    }
 }

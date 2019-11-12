@@ -83,4 +83,8 @@ public class Seznam {
         this.items = items;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s od %s", this.name, this.user.toString());
+    }
 }
