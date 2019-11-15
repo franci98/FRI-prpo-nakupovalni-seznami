@@ -49,7 +49,7 @@ public class IzdelekZrno {
     }
 
     @Transactional
-    public Izdelek read(int id) {
+    public Izdelek get(int id) {
 
         Izdelek i = em.find(Izdelek.class, id);
 
