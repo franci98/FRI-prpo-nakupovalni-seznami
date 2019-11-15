@@ -21,14 +21,14 @@ public class SeznamZrno {
 
     @PostConstruct
     private void init() {
-        log.info("Inicializacija zrna " + IzdelekZrno.class.getSimpleName());
+        log.info("Inicializacija zrna " + SeznamZrno.class.getSimpleName());
 
         // Initialize sources
     }
 
     @PreDestroy
     private void destroy() {
-        log.info("Deinicializacija zrna " + IzdelekZrno.class.getSimpleName());
+        log.info("Deinicializacija zrna " + SeznamZrno.class.getSimpleName());
 
         // Deinitialize sources
     }
