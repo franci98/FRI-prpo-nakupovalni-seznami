@@ -7,6 +7,7 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.logging.Logger;
@@ -33,7 +34,8 @@ public class IzdelekZrno {
 
     public List<Izdelek> getAllItems() {
 
-        List<Izdelek> izdelki = em.createNamedQuery("Izdelek.getAll", Izdelek.class).getResultList();
+        TypedQuery<Izdelek> namedQuery = em.createNamedQuery("Izdelek.getAll", Izdelek.class);
+        List<Izdelek> izdelki = namedQuery.getResultList();
 
         return izdelki;
     }

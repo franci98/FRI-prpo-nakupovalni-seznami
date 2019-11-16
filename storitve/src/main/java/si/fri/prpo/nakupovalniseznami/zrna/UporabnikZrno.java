@@ -41,7 +41,8 @@ public class UporabnikZrno {
 
     public List<Uporabnik> getAllUsers() {
 
-        List<Uporabnik> uporabniki =  em.createNamedQuery("Uporabnik.getAll").getResultList();
+        TypedQuery<Uporabnik> namedQuery = em.createNamedQuery("Uporabnik.getAll", Uporabnik.class);
+        List<Uporabnik> uporabniki = namedQuery.getResultList();
 
         return uporabniki;
     }
