@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,14 +25,17 @@ public class UpravljanjeSeznamovZrno {
 
     @PostConstruct
     private void init() {
-        log.info("Inicializacija zrna " + UpravljanjeSeznamovZrno.class.getSimpleName());
+
+        idZrna = UUID.randomUUID().toString();
+
+        log.info("Inicializacija zrna " + UpravljanjeSeznamovZrno.class.getSimpleName() + "z ID: " + idZrna);
 
         // Initialize sources
     }
 
     @PreDestroy
     private void destroy() {
-        log.info("Deinicializacija zrna " + UpravljanjeSeznamovZrno.class.getSimpleName());
+        log.info("Deinicializacija zrna " + UpravljanjeSeznamovZrno.class.getSimpleName() + "z ID: " + idZrna);
 
         // Deinitialize sources
     }
