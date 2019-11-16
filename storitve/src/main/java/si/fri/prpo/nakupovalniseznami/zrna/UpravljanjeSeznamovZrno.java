@@ -1,12 +1,20 @@
 package si.fri.prpo.nakupovalniseznami.zrna;
 
+import si.fri.prpo.nakupovalniseznami.dtos.SeznamDto;
+import si.fri.prpo.nakupovalniseznami.dtos.UporabnikDto;
 import si.fri.prpo.nakupovalniseznami.entitete.Seznam;
+import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @ApplicationScoped
 public class UpravljanjeSeznamovZrno {
@@ -34,9 +42,82 @@ public class UpravljanjeSeznamovZrno {
     @Inject
     private SeznamZrno seznamZrno;
 
-    public Seznam ustvariNakupovalniSeznam () {
+    public Seznam ustvariSeznam (SeznamDto seznamDto) {
 
-        return null;
+        Uporabnik uporabnik = uporabnikZrno.get(seznamDto.getUserId());
+
+        if (uporabnik == null) {
+            log.info("Nemorem ustvariti novega senama. Uporabni ne obstaja.");
+            return null;
+        }
+
+        Seznam seznam = new Seznam();
+        seznam.setUser(uporabnik);
+        seznam.setName(seznamDto.getName());
+        seznam.setCreated(Instant.now());
+        seznam.setModified(Instant.now());
+
+        return seznamZrno.create(seznam);
+
     }
+
+    public List<Seznam> poisciSeznamePoImenu (SeznamDto seznamDto) {
+
+        Uporabnik uporabnik = uporabnikZrno.get(seznamDto.getUserId());
+
+        if (uporabnik == null) {
+            log.info("Uporabni ne obstaja.");
+            return null;
+        }
+
+        String iskanoIme = seznamDto.getName();
+        List<Seznam> najdeniSeznami = new ArrayList<Seznam>();
+
+        najdeniSeznami = seznamZrno.getByNameAndUser(iskanoIme, seznamDto.getUserId());
+
+        if (!najdeniSeznami.isEmpty())
+            return najdeniSeznami;
+
+        log.info("Uporabnik" + uporabnik.getName() + "nima seznama s tem imenom");
+        return null;
+
+    }
+
+    public boolean preveriPolja (SeznamDto seznamDto) {
+
+        log.info("Preverjanje polj seznama...");
+
+        if (seznamDto.getUserId() == null) {
+            log.info("UserId polje je prazno.");
+            return false;
+        }
+        else {
+            Pattern namePattern = Pattern.compile("^[a-zA-Z0-9]+$");
+            Matcher nameCheck = namePattern.matcher(seznamDto.getName());
+            if (seznamDto.getName() == null) {
+                log.info("Name polje je prazno.");
+                return false;
+            }
+            else {
+                if (!nameCheck.find()) {
+                    log.info("Name polje vsebuje prepovedane znake.");
+                    return false;
+                }
+                else {
+                    if (seznamDto.getName().length() > 50) {
+                        log.info("Name polje vsebuje prevec znakov.");
+                        return false;
+                    }
+                    else {
+                        log.info("Preverjanje uspesno. Polja so ustrezna.");
+                        return true;
+                    }
+                }
+            }
+        }
+
+    }
+
+
 
 }

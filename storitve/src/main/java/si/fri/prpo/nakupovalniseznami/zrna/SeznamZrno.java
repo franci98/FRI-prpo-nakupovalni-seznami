@@ -45,6 +45,14 @@ public class SeznamZrno {
         return seznami;
     }
 
+    public List<Seznam> getByNameAndUser(String name, int userId) {
+
+        TypedQuery<Seznam> namedQuery = em.createNamedQuery("Seznam.getByNameAndUser", Seznam.class).setParameter("name", name).setParameter("user", userId);
+        List<Seznam> seznami = namedQuery.getResultList();
+
+        return seznami;
+    }
+
     public Seznam get(int seznamId) {
         return em.find(Seznam.class, seznamId);
     }

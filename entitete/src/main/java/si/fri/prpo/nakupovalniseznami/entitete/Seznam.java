@@ -1,6 +1,7 @@
 package si.fri.prpo.nakupovalniseznami.entitete;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,8 @@ import java.util.List;
         {
                 @NamedQuery(name = "Seznam.getAll", query = "SELECT s FROM Seznam s"),
                 @NamedQuery(name = "Seznam.getByName", query = "SELECT s FROM Seznam s WHERE s.name = :name"),
-                @NamedQuery(name = "Seznam.getLastModified", query = "SELECT s FROM Seznam s WHERE s.modified_date=(SELECT MAX(s2.modified_date) FROM Seznam s2)"),
+                @NamedQuery(name = "Seznam.getLastModified", query = "SELECT s FROM Seznam s WHERE s.modified=(SELECT MAX(s2.modified) FROM Seznam s2)"),
+                @NamedQuery(name = "Seznam.getByNameAndUser", query = "SELECT s FROM Seznam s WHERE s.user = :user AND s.name LIKE :name")
         })
 public class Seznam {
     @Id
@@ -20,12 +22,12 @@ public class Seznam {
 
     private String name;
 
-    @Temporal(TemporalType.DATE)
-    private Date created_date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Instant created;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "last_modified")
-    private Date modified_date;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "modified")
+    private Instant modified;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -35,6 +37,7 @@ public class Seznam {
     private List<Izdelek> items;
 
     // Getters and Setters
+
 
     public Integer getId() {
         return id;
@@ -52,20 +55,20 @@ public class Seznam {
         this.name = name;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public Instant getCreated() {
+        return created;
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+    public void setCreated(Instant created) {
+        this.created = created;
     }
 
-    public Date getModified_date() {
-        return modified_date;
+    public Instant getModified() {
+        return modified;
     }
 
-    public void setModified_date(Date modified_date) {
-        this.modified_date = modified_date;
+    public void setModified(Instant modified) {
+        this.modified = modified;
     }
 
     public Uporabnik getUser() {
