@@ -1,13 +1,13 @@
 package si.fri.prpo.nakupovalniseznami.dtos;
-import java.time.Instant;
+
 import java.util.Date;
 
 public class SeznamDto {
 
     private Integer userId;
     private String name;
-    private Instant created;
-    private Instant modified;
+    private Date created;
+    private Date modified;
 
     public Integer getUserId() {
         return userId;
@@ -25,19 +25,19 @@ public class SeznamDto {
         this.name = name;
     }
 
-    public Instant getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Instant created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
-    public Instant getModified() {
+    public Date getModified() {
         return modified;
     }
 
-    public void setModified(Instant modified) {
+    public void setModified(Date modified) {
         this.modified = modified;
     }
 }

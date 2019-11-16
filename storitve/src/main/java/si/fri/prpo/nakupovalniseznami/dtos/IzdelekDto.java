@@ -1,6 +1,5 @@
 package si.fri.prpo.nakupovalniseznami.dtos;
 
-import java.time.Instant;
 import java.util.Date;
 
 public class IzdelekDto {
@@ -8,7 +7,7 @@ public class IzdelekDto {
     private Integer seznamId;
     private String name;
     private String description;
-    private Instant created;
+    private Date created;
     private boolean checked;
 
     public Integer getSeznamId() {
@@ -35,11 +34,11 @@ public class IzdelekDto {
         this.description = description;
     }
 
-    public Instant getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Instant created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 

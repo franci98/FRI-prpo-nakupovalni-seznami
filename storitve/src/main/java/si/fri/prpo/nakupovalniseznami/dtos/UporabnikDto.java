@@ -1,6 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.dtos;
 
-import java.time.Instant;
+import java.util.Date;
 
 public class UporabnikDto {
 
@@ -8,8 +8,8 @@ public class UporabnikDto {
     private String surname;
     private String email;
     private String password;
-    private Instant joined;
-    private Instant last_login;
+    private Date joined;
+    private Date last_login;
 
     public String getName() {
         return name;
@@ -43,19 +43,19 @@ public class UporabnikDto {
         this.password = password;
     }
 
-    public Instant getJoined() {
+    public Date getJoined() {
         return joined;
     }
 
-    public void setJoined(Instant joined) {
+    public void setJoined(Date joined) {
         this.joined = joined;
     }
 
-    public Instant getLast_login() {
+    public Date getLast_login() {
         return last_login;
     }
 
-    public void setLast_login(Instant last_login) {
+    public void setLast_login(Date last_login) {
         this.last_login = last_login;
     }
 }

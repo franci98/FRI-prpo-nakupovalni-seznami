@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -58,8 +57,8 @@ public class UpravljanjeSeznamovZrno {
         Seznam seznam = new Seznam();
         seznam.setUser(uporabnik);
         seznam.setName(seznamDto.getName());
-        seznam.setCreated(Instant.now());
-        seznam.setModified(Instant.now());
+        seznam.setCreated(new Date());
+        seznam.setModified(new Date());
 
         return seznamZrno.create(seznam);
 

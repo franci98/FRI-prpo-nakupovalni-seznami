@@ -1,7 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.entitete;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -20,8 +19,8 @@ public class Izdelek {
 
     private String name;
     private String description;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Instant created;
+    @Temporal(TemporalType.DATE)
+    private Date created;
 
     private boolean checked;
 
@@ -56,11 +55,11 @@ public class Izdelek {
         this.description = description;
     }
 
-    public Instant getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Instant created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 

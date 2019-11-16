@@ -1,7 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.entitete;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -22,12 +21,12 @@ public class Seznam {
 
     private String name;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Instant created;
+    @Temporal(TemporalType.DATE)
+    private Date created;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "modified")
-    private Instant modified;
+    private Date modified;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -55,19 +54,19 @@ public class Seznam {
         this.name = name;
     }
 
-    public Instant getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Instant created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
-    public Instant getModified() {
+    public Date getModified() {
         return modified;
     }
 
-    public void setModified(Instant modified) {
+    public void setModified(Date modified) {
         this.modified = modified;
     }
 

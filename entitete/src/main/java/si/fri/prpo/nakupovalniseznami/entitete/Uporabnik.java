@@ -22,9 +22,9 @@ public class Uporabnik {
     private String surname;
     private String email;
     private String password;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date joined;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date last_login;
 
     @OneToMany(mappedBy = "user")
