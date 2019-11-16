@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -24,14 +25,16 @@ public class UporabnikZrno {
 
     @PostConstruct
     private void init() {
-        log.info("Inicializacija zrna " + UporabnikZrno.class.getSimpleName());
+        idZrna = UUID.randomUUID().toString();
+
+        log.info("Inicializacija zrna " + UporabnikZrno.class.getSimpleName() + "z ID: " + idZrna);
 
         // Initialize sources
     }
 
     @PreDestroy
     private void destroy() {
-        log.info("Deinicializacija zrna " + UporabnikZrno.class.getSimpleName());
+        log.info("Deinicializacija zrna " + UporabnikZrno.class.getSimpleName() + "z ID: " + idZrna);
 
         // Deinitialize sources
     }
