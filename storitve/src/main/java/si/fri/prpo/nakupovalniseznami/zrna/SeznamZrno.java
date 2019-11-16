@@ -2,12 +2,14 @@ package si.fri.prpo.nakupovalniseznami.zrna;
 
 import si.fri.prpo.nakupovalniseznami.entitete.Izdelek;
 import si.fri.prpo.nakupovalniseznami.entitete.Seznam;
+import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.logging.Logger;
@@ -37,12 +39,19 @@ public class SeznamZrno {
     private EntityManager em;
 
     public List<Seznam> getAllLists() {
-
         List<Seznam> seznami = em.createNamedQuery("Seznam.getAll").getResultList();
 
         return seznami;
     }
 
+    @Transactional
+    public List<Seznam> getAllListsForUser (Uporabnik uporabnik) {
+        List<Seznam> seznami = em.createNamedQuery("Seznam.getByUser").setParameter("user_id", uporabnik.getId()).getResultList();
+
+        return seznami;
+    }
+
+    @Transactional
     public Seznam get(int seznamId) {
         return em.find(Seznam.class, seznamId);
     }

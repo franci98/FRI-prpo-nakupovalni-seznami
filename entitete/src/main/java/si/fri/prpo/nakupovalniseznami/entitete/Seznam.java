@@ -9,7 +9,7 @@ import java.util.List;
 @NamedQueries(value =
         {
                 @NamedQuery(name = "Seznam.getAll", query = "SELECT s FROM Seznam s"),
-                @NamedQuery(name = "Seznam.getByName", query = "SELECT s FROM Seznam s WHERE s.name = :name"),
+                @NamedQuery(name = "Seznam.getByUser", query = "SELECT s FROM Seznam s WHERE s.user.id = :user_id"),
                 @NamedQuery(name = "Seznam.getLastModified", query = "SELECT s FROM Seznam s WHERE s.modified_date=(SELECT MAX(s2.modified_date) FROM Seznam s2)"),
         })
 public class Seznam {
