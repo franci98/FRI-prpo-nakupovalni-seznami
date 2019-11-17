@@ -47,7 +47,7 @@ public class SeznamZrno {
 
     public List<Seznam> getByNameAndUser(String name, int userId) {
 
-        TypedQuery<Seznam> namedQuery = em.createNamedQuery("Seznam.getByNameAndUser", Seznam.class).setParameter("name", name).setParameter("user", userId);
+        TypedQuery<Seznam> namedQuery = em.createNamedQuery("Seznam.getByNameAndUser", Seznam.class).setParameter("name", name).setParameter("userId", userId);
         List<Seznam> seznami = namedQuery.getResultList();
 
         return seznami;

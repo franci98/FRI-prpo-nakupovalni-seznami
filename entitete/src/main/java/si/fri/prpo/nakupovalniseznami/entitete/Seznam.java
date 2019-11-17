@@ -11,7 +11,7 @@ import java.util.List;
                 @NamedQuery(name = "Seznam.getAll", query = "SELECT s FROM Seznam s"),
                 @NamedQuery(name = "Seznam.getByName", query = "SELECT s FROM Seznam s WHERE s.name = :name"),
                 @NamedQuery(name = "Seznam.getLastModified", query = "SELECT s FROM Seznam s WHERE s.modified=(SELECT MAX(s2.modified) FROM Seznam s2)"),
-                @NamedQuery(name = "Seznam.getByNameAndUser", query = "SELECT s FROM Seznam s WHERE s.user = :user AND s.name LIKE :name")
+                @NamedQuery(name = "Seznam.getByNameAndUser", query = "SELECT s FROM Seznam s WHERE s.user.id = :userId AND s.name LIKE :name")
         })
 public class Seznam {
     @Id

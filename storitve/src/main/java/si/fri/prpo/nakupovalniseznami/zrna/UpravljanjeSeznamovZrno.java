@@ -73,10 +73,7 @@ public class UpravljanjeSeznamovZrno {
             return null;
         }
 
-        String iskanoIme = seznamDto.getName();
-        List<Seznam> najdeniSeznami = new ArrayList<Seznam>();
-
-        najdeniSeznami = seznamZrno.getByNameAndUser(iskanoIme, seznamDto.getUserId());
+        List<Seznam> najdeniSeznami = seznamZrno.getByNameAndUser(seznamDto.getName(), seznamDto.getUserId());
 
         if (!najdeniSeznami.isEmpty())
             return najdeniSeznami;
