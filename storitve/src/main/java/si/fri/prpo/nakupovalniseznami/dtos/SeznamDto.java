@@ -1,12 +1,13 @@
 package si.fri.prpo.nakupovalniseznami.dtos;
+
 import java.util.Date;
 
 public class SeznamDto {
 
     private Integer userId;
     private String name;
-    private Date created_date;
-    private Date modified_date;
+    private Date created;
+    private Date modified;
 
     public Integer getUserId() {
         return userId;
@@ -24,19 +25,19 @@ public class SeznamDto {
         this.name = name;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
-    public Date getModified_date() {
-        return modified_date;
+    public Date getModified() {
+        return modified;
     }
 
-    public void setModified_date(Date modified_date) {
-        this.modified_date = modified_date;
+    public void setModified(Date modified) {
+        this.modified = modified;
     }
 }

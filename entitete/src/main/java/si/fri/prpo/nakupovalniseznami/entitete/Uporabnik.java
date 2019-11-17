@@ -23,7 +23,7 @@ public class Uporabnik {
     private String email;
     private String password;
     @Temporal(TemporalType.DATE)
-    private Date join_date;
+    private Date joined;
     @Temporal(TemporalType.DATE)
     private Date last_login;
 
@@ -31,6 +31,7 @@ public class Uporabnik {
     private List<Seznam> lists;
 
     // Getters and Setters
+
 
     public Integer getId() {
         return id;
@@ -72,12 +73,12 @@ public class Uporabnik {
         this.password = password;
     }
 
-    public Date getJoin_date() {
-        return join_date;
+    public Date getJoined() {
+        return joined;
     }
 
-    public void setJoin_date(Date join_date) {
-        this.join_date = join_date;
+    public void setJoined(Date joined) {
+        this.joined = joined;
     }
 
     public Date getLast_login() {

@@ -2,14 +2,13 @@ package si.fri.prpo.nakupovalniseznami.zrna;
 
 import si.fri.prpo.nakupovalniseznami.entitete.Izdelek;
 import si.fri.prpo.nakupovalniseznami.entitete.Seznam;
-import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.logging.Logger;
@@ -39,19 +38,21 @@ public class SeznamZrno {
     private EntityManager em;
 
     public List<Seznam> getAllLists() {
-        List<Seznam> seznami = em.createNamedQuery("Seznam.getAll").getResultList();
+
+        TypedQuery<Seznam> namedQuery = em.createNamedQuery("Seznam.getAll", Seznam.class);
+        List<Seznam> seznami = namedQuery.getResultList();
 
         return seznami;
     }
 
-    @Transactional
-    public List<Seznam> getAllListsForUser (Uporabnik uporabnik) {
-        List<Seznam> seznami = em.createNamedQuery("Seznam.getByUser").setParameter("user_id", uporabnik.getId()).getResultList();
+    public List<Seznam> getByNameAndUser(String name, int userId) {
+
+        TypedQuery<Seznam> namedQuery = em.createNamedQuery("Seznam.getByNameAndUser", Seznam.class).setParameter("name", name).setParameter("userId", userId);
+        List<Seznam> seznami = namedQuery.getResultList();
 
         return seznami;
     }
 
-    @Transactional
     public Seznam get(int seznamId) {
         return em.find(Seznam.class, seznamId);
     }

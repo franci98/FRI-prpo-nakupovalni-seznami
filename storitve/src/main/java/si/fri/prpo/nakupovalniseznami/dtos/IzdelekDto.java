@@ -7,7 +7,7 @@ public class IzdelekDto {
     private Integer seznamId;
     private String name;
     private String description;
-    private Date created_date;
+    private Date created;
     private boolean checked;
 
     public Integer getSeznamId() {
@@ -34,12 +34,12 @@ public class IzdelekDto {
         this.description = description;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     public boolean isChecked() {

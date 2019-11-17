@@ -8,7 +8,7 @@ public class UporabnikDto {
     private String surname;
     private String email;
     private String password;
-    private Date join_date;
+    private Date joined;
     private Date last_login;
 
     public String getName() {
@@ -43,12 +43,12 @@ public class UporabnikDto {
         this.password = password;
     }
 
-    public Date getJoin_date() {
-        return join_date;
+    public Date getJoined() {
+        return joined;
     }
 
-    public void setJoin_date(Date join_date) {
-        this.join_date = join_date;
+    public void setJoined(Date joined) {
+        this.joined = joined;
     }
 
     public Date getLast_login() {

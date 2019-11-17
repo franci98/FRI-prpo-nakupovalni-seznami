@@ -9,7 +9,7 @@ import java.util.Date;
         {
                 @NamedQuery(name = "Izdelek.getAll", query = "SELECT i FROM Izdelek i"),
                 @NamedQuery(name = "Izdelek.getByName", query = "SELECT i FROM Izdelek i WHERE i.name = :name"),
-                @NamedQuery(name = "Izdelek.getLastCreated", query = "SELECT i FROM Izdelek i WHERE i.created_date=(SELECT MAX(i2.created_date) FROM Izdelek i2)"),
+                @NamedQuery(name = "Izdelek.getLastCreated", query = "SELECT i FROM Izdelek i WHERE i.created=(SELECT MAX(i2.created) FROM Izdelek i2)"),
         })
 public class Izdelek {
     @Id
@@ -20,7 +20,7 @@ public class Izdelek {
     private String name;
     private String description;
     @Temporal(TemporalType.DATE)
-    private Date created_date;
+    private Date created;
 
     private boolean checked;
 
@@ -29,6 +29,7 @@ public class Izdelek {
     private Seznam list;
 
     // Getters and Setters
+
 
     public Integer getId() {
         return id;
@@ -54,12 +55,20 @@ public class Izdelek {
         this.description = description;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     public Seznam getList() {
@@ -72,6 +81,6 @@ public class Izdelek {
 
     @Override
     public String toString() {
-        return String.format("%s - %s %tF", this.name, this.description, this.created_date);
+        return String.format("%s - %s %tF", this.name, this.description, this.created);
     }
 }
