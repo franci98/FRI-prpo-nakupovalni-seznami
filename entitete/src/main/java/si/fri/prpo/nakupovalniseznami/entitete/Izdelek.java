@@ -9,6 +9,7 @@ import java.util.Date;
         {
                 @NamedQuery(name = "Izdelek.getAll", query = "SELECT i FROM Izdelek i"),
                 @NamedQuery(name = "Izdelek.getByName", query = "SELECT i FROM Izdelek i WHERE i.name = :name"),
+                @NamedQuery(name = "Izdelek.getByListId", query = "SELECT i FROM Izdelek i WHERE i.list.id = :id"),
                 @NamedQuery(name = "Izdelek.getLastCreated", query = "SELECT i FROM Izdelek i WHERE i.created=(SELECT MAX(i2.created) FROM Izdelek i2)"),
         })
 public class Izdelek {
@@ -81,6 +82,6 @@ public class Izdelek {
 
     @Override
     public String toString() {
-        return String.format("%s - %s %tF", this.name, this.description, this.created);
+        return String.format("%s - %s %tF %b", this.name, this.description, this.created, this.checked);
     }
 }

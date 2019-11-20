@@ -10,6 +10,7 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -53,6 +54,10 @@ public class UpravljanjeSeznamovZrno {
             log.info("Nemorem ustvariti novega senama. Uporabni ne obstaja.");
             return null;
         }
+        if(!preveriPolja(seznamDto)) {
+            log.info("Nemorem ustvariti novega senama. Podatki niso veljavni.");
+            return null;
+        }
 
         Seznam seznam = new Seznam();
         seznam.setUser(uporabnik);
@@ -92,7 +97,7 @@ public class UpravljanjeSeznamovZrno {
             return false;
         }
         else {
-            Pattern namePattern = Pattern.compile("^[a-zA-Z0-9]+$");
+            Pattern namePattern = Pattern.compile("^[a-zA-Z0-9 ]+$");
             Matcher nameCheck = namePattern.matcher(seznamDto.getName());
             if (seznamDto.getName() == null) {
                 log.info("Name polje je prazno.");

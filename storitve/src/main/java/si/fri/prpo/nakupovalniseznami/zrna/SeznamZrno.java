@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -22,7 +23,9 @@ public class SeznamZrno {
 
     @PostConstruct
     private void init() {
-        log.info("Inicializacija zrna " + SeznamZrno.class.getSimpleName());
+        idZrna = UUID.randomUUID().toString();
+
+        log.info("Inicializacija zrna " + SeznamZrno.class.getSimpleName() + "z ID:" + idZrna);
 
         // Initialize sources
     }
@@ -48,6 +51,14 @@ public class SeznamZrno {
     public List<Seznam> getByNameAndUser(String name, int userId) {
 
         TypedQuery<Seznam> namedQuery = em.createNamedQuery("Seznam.getByNameAndUser", Seznam.class).setParameter("name", name).setParameter("userId", userId);
+        List<Seznam> seznami = namedQuery.getResultList();
+
+        return seznami;
+    }
+
+    public List<Seznam> getByUser(int userId) {
+
+        TypedQuery<Seznam> namedQuery = em.createNamedQuery("Seznam.getByUser", Seznam.class).setParameter("userId", userId);
         List<Seznam> seznami = namedQuery.getResultList();
 
         return seznami;

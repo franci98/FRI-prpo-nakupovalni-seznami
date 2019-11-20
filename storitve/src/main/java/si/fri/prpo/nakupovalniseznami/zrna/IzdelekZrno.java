@@ -5,21 +5,24 @@ import si.fri.prpo.nakupovalniseznami.entitete.Izdelek;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
-@ApplicationScoped
+@RequestScoped
 public class IzdelekZrno {
 
     private String idZrna;
 
     @PostConstruct
     private void init() {
-        log.info("Inicializacija zrna" + IzdelekZrno.class.getName());
+        idZrna = UUID.randomUUID().toString();
+        log.info("Inicializacija zrna " + IzdelekZrno.class.getName() + "z ID:" + idZrna);
     }
 
     @PreDestroy
