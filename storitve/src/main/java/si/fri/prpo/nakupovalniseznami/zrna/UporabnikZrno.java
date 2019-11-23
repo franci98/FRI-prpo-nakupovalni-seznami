@@ -91,10 +91,11 @@ public class UporabnikZrno {
     }
 
     @Transactional
-    public void update(int userId, Uporabnik uporabnik) {
+    public Uporabnik update(int userId, Uporabnik uporabnik) {
         Uporabnik oldUporabnik = em.find(Uporabnik.class, userId);
         uporabnik.setId(oldUporabnik.getId());
         em.merge(uporabnik);
+        return uporabnik;
     }
 
     @Transactional

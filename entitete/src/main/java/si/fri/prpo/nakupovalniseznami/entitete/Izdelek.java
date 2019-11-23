@@ -1,5 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.entitete;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -25,6 +26,7 @@ public class Izdelek {
 
     private boolean checked;
 
+    @JsonbTransient
     @ManyToOne
     @JoinColumn(name = "list_id")
     private Seznam list;

@@ -1,5 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.entitete;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +30,7 @@ public class Seznam {
     @Column(name = "modified")
     private Date modified;
 
+    @JsonbTransient
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Uporabnik user;
