@@ -57,18 +57,6 @@
                 <artifactId>entitete</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.kumuluz.ee</groupId>
-                <artifactId>kumuluzee-jax-rs-jersey</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>com.kumuluz.ee</groupId>
-                <artifactId>kumuluzee-json-p-jsonp</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>com.kumuluz.ee</groupId>
-                <artifactId>kumuluzee-json-b-yasson</artifactId>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
