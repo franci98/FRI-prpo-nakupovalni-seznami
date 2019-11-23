@@ -1,8 +1,7 @@
-package si.fri.prpo.nakupovalniseznami.api;
+package si.fri.prpo.nakupovalniseznami.servlets;
 
 import si.fri.prpo.nakupovalniseznami.dtos.IzdelekDto;
 import si.fri.prpo.nakupovalniseznami.dtos.SeznamDto;
-import si.fri.prpo.nakupovalniseznami.dtos.UporabnikDto;
 import si.fri.prpo.nakupovalniseznami.entitete.Izdelek;
 import si.fri.prpo.nakupovalniseznami.entitete.Seznam;
 import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
