@@ -1,5 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.zrna;
 
+import si.fri.prpo.nakupovalniseznami.annotations.CountCalls;
 import si.fri.prpo.nakupovalniseznami.dtos.SeznamDto;
 import si.fri.prpo.nakupovalniseznami.dtos.UporabnikDto;
 import si.fri.prpo.nakupovalniseznami.entitete.Seznam;
@@ -46,6 +47,7 @@ public class UpravljanjeSeznamovZrno {
     @Inject
     private SeznamZrno seznamZrno;
 
+    @CountCalls
     public Seznam ustvariSeznam (SeznamDto seznamDto) {
 
         Uporabnik uporabnik = uporabnikZrno.get(seznamDto.getUserId());
@@ -69,6 +71,7 @@ public class UpravljanjeSeznamovZrno {
 
     }
 
+    @CountCalls
     public List<Seznam> poisciSeznamePoImenu (SeznamDto seznamDto) {
 
         Uporabnik uporabnik = uporabnikZrno.get(seznamDto.getUserId());

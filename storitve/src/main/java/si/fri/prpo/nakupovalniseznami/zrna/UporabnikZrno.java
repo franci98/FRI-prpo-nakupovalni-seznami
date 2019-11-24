@@ -1,5 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.zrna;
 
+import si.fri.prpo.nakupovalniseznami.annotations.CountCalls;
 import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
 
 import javax.annotation.PostConstruct;
@@ -42,6 +43,7 @@ public class UporabnikZrno {
     @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
+    @CountCalls
     public List<Uporabnik> getAllUsers() {
 
         TypedQuery<Uporabnik> namedQuery = em.createNamedQuery("Uporabnik.getAll", Uporabnik.class);

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-@RequestScoped
+@ApplicationScoped
 public class IzdelekZrno {
 
     private String idZrna;
