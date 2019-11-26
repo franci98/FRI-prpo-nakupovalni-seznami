@@ -1,5 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.zrna;
 
+import si.fri.prpo.nakupovalniseznami.annotations.CountCalls;
 import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
 
 import javax.annotation.PostConstruct;
@@ -51,6 +52,7 @@ public class UporabnikZrno {
         return uporabniki;
     }
 
+    @CountCalls
     public Uporabnik get(int userId) {
         return em.find(Uporabnik.class, userId);
     }
