@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -84,8 +85,10 @@ public class UporabnikZrno {
 
     @Transactional
     public Uporabnik create(Uporabnik u){
-        if (u != null)
+        if (u != null) {
+            u.setJoined(new Date());
             em.persist(u);
+        }
 
         return u;
     }
