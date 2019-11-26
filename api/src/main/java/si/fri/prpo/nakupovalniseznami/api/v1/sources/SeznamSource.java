@@ -2,6 +2,8 @@ package si.fri.prpo.nakupovalniseznami.api.v1.sources;
 
 import si.fri.prpo.nakupovalniseznami.dtos.SeznamDto;
 import si.fri.prpo.nakupovalniseznami.entitete.Seznam;
+import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
+import si.fri.prpo.nakupovalniseznami.zrna.IzdelekZrno;
 import si.fri.prpo.nakupovalniseznami.zrna.SeznamZrno;
 import si.fri.prpo.nakupovalniseznami.zrna.UpravljanjeSeznamovZrno;
 
@@ -71,12 +73,22 @@ public class SeznamSource {
     }
 
     @GET
-    @Path("/fromUserByName")
-    public Response findListsWithName(SeznamDto seznamDto) {
+    @Path("uporabniki/{id}")
+    public Response getListsFromUser(@PathParam("id") Integer userId) {
         return Response
-                .status(Response.Status.CREATED)
+                .status(Response.Status.OK)
+                .entity(upravljanjeSeznamovZrno.pridobiSeznameUporabnika(userId))
+                .build();
+    }
+
+    @GET
+    @Path("/fromUserByName")
+    public Response getListsWithName(SeznamDto seznamDto) {
+        return Response
+                .status(Response.Status.OK)
                 .entity(upravljanjeSeznamovZrno.poisciSeznamePoImenu(seznamDto))
                 .build();
     }
+
 }
 

@@ -62,12 +62,13 @@ public class IzdelekZrno {
     }
 
     @Transactional
-    public void update(int id, Izdelek izdelek) {
+    public Izdelek update(int id, Izdelek izdelek) {
 
         Izdelek i = em.find(Izdelek.class, id);
 
         izdelek.setId(i.getId());
         em.merge(izdelek);
+        return izdelek;
     }
 
     @Transactional
