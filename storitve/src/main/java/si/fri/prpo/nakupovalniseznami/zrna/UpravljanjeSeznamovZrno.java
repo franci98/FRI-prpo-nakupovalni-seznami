@@ -77,13 +77,17 @@ public class UpravljanjeSeznamovZrno {
             log.info("Uporabni ne obstaja.");
             return null;
         }
+        if(!preveriPolja(seznamDto)) {
+            log.info("Nemorem ustvariti novega senama. Podatki niso veljavni.");
+            return null;
+        }
 
         List<Seznam> najdeniSeznami = seznamZrno.getByNameAndUser(seznamDto.getName(), seznamDto.getUserId());
 
         if (!najdeniSeznami.isEmpty())
             return najdeniSeznami;
 
-        log.info("Uporabnik" + uporabnik.getName() + "nima seznama s tem imenom");
+        log.info("Uporabnik " + uporabnik.getName() + " nima seznama s tem imenom");
         return null;
 
     }

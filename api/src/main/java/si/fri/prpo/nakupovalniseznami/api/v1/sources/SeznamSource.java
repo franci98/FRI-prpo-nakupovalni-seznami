@@ -69,5 +69,14 @@ public class SeznamSource {
                 .entity(seznamZrno.delete(seznamId))
                 .build();
     }
+
+    @GET
+    @Path("/fromUserByName")
+    public Response findListsWithName(SeznamDto seznamDto) {
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(upravljanjeSeznamovZrno.poisciSeznamePoImenu(seznamDto))
+                .build();
+    }
 }
 
