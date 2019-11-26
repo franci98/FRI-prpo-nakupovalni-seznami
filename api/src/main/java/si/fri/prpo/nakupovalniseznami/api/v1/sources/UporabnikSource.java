@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 @Path("uporabniki")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
-public class UserSource {
+public class UporabnikSource {
 
     @Inject
     private UporabnikZrno uporabnikZrno;

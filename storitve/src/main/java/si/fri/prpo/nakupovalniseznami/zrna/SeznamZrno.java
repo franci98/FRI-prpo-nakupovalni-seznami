@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -77,10 +78,13 @@ public class SeznamZrno {
     }
 
     @Transactional
-    public void update(int seznamId, Seznam seznam) {
+    public Seznam update(int seznamId, Seznam seznam) {
         Seznam oldSeznam = em.find(Seznam.class, seznamId);
         seznam.setId(oldSeznam.getId());
+        seznam.setCreated(oldSeznam.getCreated());
+        seznam.setModified(new Date());
         em.merge(seznam);
+        return seznam;
     }
 
 
