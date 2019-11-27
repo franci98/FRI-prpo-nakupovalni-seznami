@@ -1,5 +1,7 @@
 package si.fri.prpo.nakupovalniseznami.zrna;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import si.fri.prpo.nakupovalniseznami.entitete.Izdelek;
 
 import javax.annotation.PostConstruct;
@@ -35,12 +37,11 @@ public class IzdelekZrno {
     @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
-    public List<Izdelek> getAllItems() {
+    public List<Izdelek> getAllItems(QueryParameters query) {
 
-        TypedQuery<Izdelek> namedQuery = em.createNamedQuery("Izdelek.getAll", Izdelek.class);
-        List<Izdelek> izdelki = namedQuery.getResultList();
+        List<Izdelek> izdeleki = JPAUtils.queryEntities(em, Izdelek.class, query);
 
-        return izdelki;
+        return izdeleki;
     }
 
     @Transactional

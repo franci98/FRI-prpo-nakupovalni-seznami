@@ -1,5 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.api.v1.sources;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
 import si.fri.prpo.nakupovalniseznami.dtos.IzdelekDto;
 import si.fri.prpo.nakupovalniseznami.dtos.SeznamDto;
 import si.fri.prpo.nakupovalniseznami.entitete.Izdelek;
@@ -12,14 +13,20 @@ import si.fri.prpo.nakupovalniseznami.zrna.UpravljanjeSeznamovZrno;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.List;
 
 @ApplicationScoped
 @Path("izdelki")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 public class IzdelekSource {
+
+    @Context
+    protected UriInfo uriInfo;
 
     @Inject
     private IzdelekZrno izdelekZrno;
@@ -28,7 +35,11 @@ public class IzdelekSource {
 
     @GET
     public Response getItems() {
-        return Response.ok(izdelekZrno.getAllItems()).build();
+
+        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        List<Izdelek> izdelki = izdelekZrno.getAllItems(query);
+
+        return Response.ok(izdelki).build();
     }
 
     /***
