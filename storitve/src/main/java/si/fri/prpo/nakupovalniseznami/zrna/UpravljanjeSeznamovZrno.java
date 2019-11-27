@@ -106,7 +106,7 @@ public class UpravljanjeSeznamovZrno {
         return query.getResultList();
     }
 
-    public boolean preveriPolja (SeznamDto seznamDto) {
+    private boolean preveriPolja(SeznamDto seznamDto) {
 
         log.info("Preverjanje polj seznama...");
 
