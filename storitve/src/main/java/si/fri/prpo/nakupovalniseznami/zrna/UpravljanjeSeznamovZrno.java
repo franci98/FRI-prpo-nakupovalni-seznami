@@ -10,6 +10,9 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +26,9 @@ public class UpravljanjeSeznamovZrno {
     private Logger log = Logger.getLogger(UpravljanjeSeznamovZrno.class.getName());
 
     private String idZrna;
+
+    @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
+    private EntityManager em;
 
     @PostConstruct
     private void init() {
@@ -80,15 +86,24 @@ public class UpravljanjeSeznamovZrno {
             log.info("Uporabni ne obstaja.");
             return null;
         }
+        if(!preveriPolja(seznamDto)) {
+            log.info("Nemorem ustvariti novega senama. Podatki niso veljavni.");
+            return null;
+        }
 
         List<Seznam> najdeniSeznami = seznamZrno.getByNameAndUser(seznamDto.getName(), seznamDto.getUserId());
 
         if (!najdeniSeznami.isEmpty())
             return najdeniSeznami;
 
-        log.info("Uporabnik" + uporabnik.getName() + "nima seznama s tem imenom");
+        log.info("Uporabnik " + uporabnik.getName() + " nima seznama s tem imenom");
         return null;
 
+    }
+
+    public List<Seznam> pridobiSeznameUporabnika(Integer userId) {
+        TypedQuery<Seznam> query = em.createNamedQuery("Seznam.getByUserId", Seznam.class).setParameter("id", userId);
+        return query.getResultList();
     }
 
     public boolean preveriPolja (SeznamDto seznamDto) {
