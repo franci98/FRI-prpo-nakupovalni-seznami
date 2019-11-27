@@ -1,13 +1,17 @@
 package si.fri.prpo.nakupovalniseznami.api.v1.sources;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
 import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
 import si.fri.prpo.nakupovalniseznami.zrna.UporabnikZrno;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.List;
 
 @ApplicationScoped
 @Path("uporabniki")
@@ -15,12 +19,17 @@ import javax.ws.rs.core.Response;
 @Consumes({MediaType.APPLICATION_JSON})
 public class UporabnikSource {
 
+    @Context
+    protected UriInfo uriInfo;
+
     @Inject
     private UporabnikZrno uporabnikZrno;
 
     @GET
     public Response getUsers() {
-        return Response.ok(uporabnikZrno.getAllUsers()).build();
+        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        List<Uporabnik> uporabniki = uporabnikZrno.getAllUsers(query);
+        return Response.ok(uporabniki).build();
     }
 
     /***
