@@ -1,5 +1,7 @@
 package si.fri.prpo.nakupovalniseznami.zrna;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import si.fri.prpo.nakupovalniseznami.annotations.CountCalls;
 import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
 
@@ -45,11 +47,8 @@ public class UporabnikZrno {
     private EntityManager em;
 
     @CountCalls
-    public List<Uporabnik> getAllUsers() {
-
-        TypedQuery<Uporabnik> namedQuery = em.createNamedQuery("Uporabnik.getAll", Uporabnik.class);
-        List<Uporabnik> uporabniki = namedQuery.getResultList();
-
+    public List<Uporabnik> getAllUsers(QueryParameters queryParameters) {
+        List<Uporabnik> uporabniki = JPAUtils.queryEntities(em, Uporabnik.class, queryParameters);
         return uporabniki;
     }
 
