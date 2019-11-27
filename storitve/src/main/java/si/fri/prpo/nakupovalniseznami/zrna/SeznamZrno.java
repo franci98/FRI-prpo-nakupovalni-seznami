@@ -1,5 +1,7 @@
 package si.fri.prpo.nakupovalniseznami.zrna;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import si.fri.prpo.nakupovalniseznami.entitete.Izdelek;
 import si.fri.prpo.nakupovalniseznami.entitete.Seznam;
 
@@ -10,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import javax.ws.rs.QueryParam;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -41,10 +44,9 @@ public class SeznamZrno {
     @PersistenceContext(unitName = "nakupovalni-seznami-jpa")
     private EntityManager em;
 
-    public List<Seznam> getAllLists() {
+    public List<Seznam> getAllLists(QueryParameters query) {
 
-        TypedQuery<Seznam> namedQuery = em.createNamedQuery("Seznam.getAll", Seznam.class);
-        List<Seznam> seznami = namedQuery.getResultList();
+        List<Seznam> seznami = JPAUtils.queryEntities(em, Seznam.class, query);
 
         return seznami;
     }
@@ -59,7 +61,7 @@ public class SeznamZrno {
 
     public List<Seznam> getByUser(int userId) {
 
-        TypedQuery<Seznam> namedQuery = em.createNamedQuery("Seznam.getByUser", Seznam.class).setParameter("userId", userId);
+        TypedQuery<Seznam> namedQuery = em.createNamedQuery("Seznam.getByUserId", Seznam.class).setParameter("id", userId);
         List<Seznam> seznami = namedQuery.getResultList();
 
         return seznami;

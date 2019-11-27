@@ -1,5 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.api.v1.sources;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
 import si.fri.prpo.nakupovalniseznami.dtos.SeznamDto;
 import si.fri.prpo.nakupovalniseznami.entitete.Seznam;
 import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
@@ -10,14 +11,20 @@ import si.fri.prpo.nakupovalniseznami.zrna.UpravljanjeSeznamovZrno;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.List;
 
 @ApplicationScoped
 @Path("seznami")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 public class SeznamSource {
+
+    @Context
+    protected UriInfo uriInfo;
 
     @Inject
     private SeznamZrno seznamZrno;
@@ -26,7 +33,11 @@ public class SeznamSource {
 
     @GET
     public Response getLists() {
-        return Response.ok(seznamZrno.getAllLists()).build();
+
+        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        List<Seznam> seznami = seznamZrno.getAllLists(query);
+
+        return Response.ok(seznami).build();
     }
 
     /***
