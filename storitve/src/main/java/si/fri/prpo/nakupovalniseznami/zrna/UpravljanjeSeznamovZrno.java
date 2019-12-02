@@ -5,6 +5,7 @@ import si.fri.prpo.nakupovalniseznami.dtos.SeznamDto;
 import si.fri.prpo.nakupovalniseznami.dtos.UporabnikDto;
 import si.fri.prpo.nakupovalniseznami.entitete.Seznam;
 import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
+import si.fri.prpo.nakupovalniseznami.izjeme.NeveljavenSeznamException;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -88,7 +89,7 @@ public class UpravljanjeSeznamovZrno {
         }
         if(!preveriPolja(seznamDto)) {
             log.info("Nemorem ustvariti novega senama. Podatki niso veljavni.");
-            return null;
+            throw new NeveljavenSeznamException("Seznam je nepravilno izpolnjen.");
         }
 
         List<Seznam> najdeniSeznami = seznamZrno.getByNameAndUser(seznamDto.getName(), seznamDto.getUserId());
