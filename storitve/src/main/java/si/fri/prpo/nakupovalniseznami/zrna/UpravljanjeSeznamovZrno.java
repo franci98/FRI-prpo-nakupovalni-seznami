@@ -57,6 +57,9 @@ public class UpravljanjeSeznamovZrno {
     @CountCalls
     public Seznam ustvariSeznam (SeznamDto seznamDto) {
 
+        if (seznamDto == null) {
+            throw new NeveljavenSeznamException("Ni podatkov.");
+        }
         Uporabnik uporabnik = uporabnikZrno.get(seznamDto.getUserId());
 
         if (uporabnik == null) {
@@ -65,7 +68,7 @@ public class UpravljanjeSeznamovZrno {
         }
         if(!preveriPolja(seznamDto)) {
             log.info("Nemorem ustvariti novega senama. Podatki niso veljavni.");
-            return null;
+            throw new NeveljavenSeznamException("Seznam je nepravilno izpolnjen.");
         }
 
         Seznam seznam = new Seznam();
@@ -89,7 +92,7 @@ public class UpravljanjeSeznamovZrno {
         }
         if(!preveriPolja(seznamDto)) {
             log.info("Nemorem ustvariti novega senama. Podatki niso veljavni.");
-            throw new NeveljavenSeznamException("Seznam je nepravilno izpolnjen.");
+            return null;
         }
 
         List<Seznam> najdeniSeznami = seznamZrno.getByNameAndUser(seznamDto.getName(), seznamDto.getUserId());

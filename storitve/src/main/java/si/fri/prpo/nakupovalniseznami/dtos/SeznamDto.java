@@ -1,8 +1,9 @@
 package si.fri.prpo.nakupovalniseznami.dtos;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SeznamDto {
+public class SeznamDto implements Serializable {
 
     private Integer userId;
     private String name;

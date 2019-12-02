@@ -4,7 +4,9 @@ import si.fri.prpo.nakupovalniseznami.izjeme.NeveljavenSeznamException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
+@Provider
 public class NeveljavniSeznamExceptionMapper implements ExceptionMapper<NeveljavenSeznamException> {
 
     @Override
