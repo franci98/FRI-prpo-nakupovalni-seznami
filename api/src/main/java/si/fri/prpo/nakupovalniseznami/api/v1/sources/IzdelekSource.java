@@ -1,5 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.api.v1.sources;
 
+import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,14 +15,19 @@ import si.fri.prpo.nakupovalniseznami.zrna.SeznamZrno;
 import si.fri.prpo.nakupovalniseznami.zrna.UpravljanjeIzdelkovZrno;
 import si.fri.prpo.nakupovalniseznami.zrna.UpravljanjeSeznamovZrno;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 @Path("izdelki")
@@ -36,6 +42,15 @@ public class IzdelekSource {
     private IzdelekZrno izdelekZrno;
     @Inject
     private UpravljanjeIzdelkovZrno upravljanjeIzdelkovZrno;
+
+    private Logger log = Logger.getLogger(Izdelek.class.getSimpleName());
+
+    private Client httpClient;
+
+    @PostConstruct
+    private void init() {
+        httpClient = ClientBuilder.newClient();
+    }
 
     @GET
     @Operation(summary = "Pridobi vse izdelke",
@@ -98,6 +113,17 @@ public class IzdelekSource {
             description = "Ustvari nov izdelek s podanimi podatki"
     )
     public Response addItem(IzdelekDto izdelekDto) {
+        String baseUrl = ConfigurationUtil.getInstance().get("kumuluzee.recommendation-url").get();
+        Response resp = httpClient
+                .target(baseUrl)
+                .request()
+                .post(Entity.entity(izdelekDto.getName(), MediaType.TEXT_PLAIN));
+
+        if (resp.getStatus() == 200)
+            log.info("Added to priporocilni sistem");
+        else
+            log.info("Adding to priporocilni sistem failed - error" + resp.getStatus());
+
         return Response
                 .status(Response.Status.CREATED)
                 .entity(upravljanjeIzdelkovZrno.kreirajIzdelekSeznama(izdelekDto))

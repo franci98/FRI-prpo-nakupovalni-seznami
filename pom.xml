@@ -18,6 +18,7 @@
     <description>Storitev za delo z nakupovalnimi seznami.</description>
 
     <properties>
+        <java.version>12</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
