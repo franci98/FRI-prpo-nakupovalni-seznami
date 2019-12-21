@@ -63,5 +63,9 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <finalName>nakupovalni-seznami</finalName>
+
+    </build>
 
 </project>
