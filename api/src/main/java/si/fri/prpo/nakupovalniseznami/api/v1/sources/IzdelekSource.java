@@ -122,7 +122,7 @@ public class IzdelekSource {
     )
     public Response updateItem(@PathParam("id") Integer itemId, Izdelek izdelek) {
         return Response
-                .status(Response.Status.CREATED)
+                .status(Response.Status.OK)
                 .entity(izdelekZrno.update(itemId, izdelek))
                 .build();
     }
