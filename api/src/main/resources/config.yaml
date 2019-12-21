@@ -1,6 +1,7 @@
 kumuluzee:
   name: nakupovalni-seznami
   version: 1.0.0
+  recommendation-url: http://localhost:3333/v1/priporocila
   env:
     name: dev
   datasources:
