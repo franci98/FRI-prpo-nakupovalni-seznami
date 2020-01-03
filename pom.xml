@@ -27,6 +27,7 @@
         <postgresql.version>42.2.8</postgresql.version>
         <kumuluzee-rest.version>1.2.3</kumuluzee-rest.version>
         <kumuluzee-openapi.version>1.0.1</kumuluzee-openapi.version>
+        <kumuluzee-health.version>2.1.0</kumuluzee-health.version>
     </properties>
 
     <dependencyManagement>
@@ -44,7 +45,6 @@
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>si.fri.prpo.nakupovalniseznami</groupId>
                 <artifactId>api</artifactId>

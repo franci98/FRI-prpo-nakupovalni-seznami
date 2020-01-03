@@ -6,7 +6,15 @@ kumuluzee:
     name: dev
   datasources:
     - jndi-name: jdbc/NakupovalniSeznamiJDBC
-      connection-url: jdbc:postgresql://localhost:5432/nakupovalniseznamidb
+      connection-url: jdbc:postgresql://192.168.99.101:5432/nakupovalniseznamidb
       username: postgres
       password: postgres
       max-pool-size: 20
+  health:
+    checks:
+      data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/NakupovalniSeznamiJDBC
+      http-health-check:
+        type: liveness
+        connection-url: http://www.reddit.com
