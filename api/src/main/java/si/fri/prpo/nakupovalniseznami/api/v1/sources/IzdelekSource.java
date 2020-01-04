@@ -1,6 +1,7 @@
 package si.fri.prpo.nakupovalniseznami.api.v1.sources;
 
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
+import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -33,6 +34,7 @@ import java.util.logging.Logger;
 @Path("izdelki")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
+@CrossOrigin
 public class IzdelekSource {
 
     @Context
