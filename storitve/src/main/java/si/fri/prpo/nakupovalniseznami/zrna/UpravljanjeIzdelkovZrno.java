@@ -53,6 +53,7 @@ public class UpravljanjeIzdelkovZrno {
 
     public Izdelek kreirajIzdelekSeznama(IzdelekDto izdelekDto) {
         Seznam seznam = seznamZrno.get(izdelekDto.getSeznamId());
+        List<Izdelek> izdelkiSeznama = seznam.getItems();
 
         Izdelek izdelek = new Izdelek();
         izdelek.setCreated(new Date());
@@ -61,7 +62,13 @@ public class UpravljanjeIzdelkovZrno {
         izdelek.setChecked(false);
         izdelek.setList(seznam);
 
+        izdelkiSeznama.add(izdelek);
+        seznam.setItems(izdelkiSeznama);
+
+        Seznam updatedSeznam = seznamZrno.update(seznam.getId(), seznam);
+
         return izdelekZrno.create(izdelek);
+
     }
 
     public List<Izdelek> pridobiIzdelkeSeznama(Integer seznamId) {
