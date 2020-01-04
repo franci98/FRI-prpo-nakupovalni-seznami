@@ -1,5 +1,6 @@
 package si.fri.prpo.nakupovalniseznami.api.v1;
 
+import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -32,5 +33,6 @@ import javax.ws.rs.ApplicationPath;
         security = @SecurityRequirement(name = "openid-connect"),
         servers = @Server(url ="http://localhost:8080/v1"))
 @ApplicationPath("v1")
+@CrossOrigin
 public class NakupovalniSeznamiApplication extends Application {
 }
