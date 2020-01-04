@@ -24,7 +24,7 @@ import java.util.List;
 @Path("seznami")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
-@CrossOrigin
+@CrossOrigin(supportedMethods = "GET, POST, PUT, DELETE, HEAD, OPTIONS")
 public class SeznamSource {
 
     @Context
@@ -139,6 +139,7 @@ public class SeznamSource {
             description = "Izbriše seznam s podanim identifikatorjem"
     )
     public Response deleteList(@PathParam("id") Integer seznamId) {
+        System.out.println("deleting seznam with id: " + seznamId);
         return Response
                 .status(Response.Status.OK)
                 .entity(seznamZrno.delete(seznamId))

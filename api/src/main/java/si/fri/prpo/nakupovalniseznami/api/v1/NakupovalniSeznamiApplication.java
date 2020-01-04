@@ -33,6 +33,6 @@ import javax.ws.rs.ApplicationPath;
         security = @SecurityRequirement(name = "openid-connect"),
         servers = @Server(url ="http://localhost:8080/v1"))
 @ApplicationPath("v1")
-@CrossOrigin
+@CrossOrigin(supportedMethods = "GET, POST, PUT, DELETE, HEAD, OPTIONS")
 public class NakupovalniSeznamiApplication extends Application {
 }

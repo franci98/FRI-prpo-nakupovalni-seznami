@@ -25,7 +25,7 @@ import java.util.List;
 @Path("uporabniki")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
-@CrossOrigin
+@CrossOrigin(supportedMethods = "GET, POST, PUT, DELETE, HEAD, OPTIONS")
 public class UporabnikSource {
 
     @Context
