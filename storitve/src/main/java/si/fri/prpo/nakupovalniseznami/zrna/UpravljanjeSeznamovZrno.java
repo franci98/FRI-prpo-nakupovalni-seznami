@@ -1,8 +1,10 @@
 package si.fri.prpo.nakupovalniseznami.zrna;
 
 import si.fri.prpo.nakupovalniseznami.annotations.CountCalls;
+import si.fri.prpo.nakupovalniseznami.dtos.IzdelekDto;
 import si.fri.prpo.nakupovalniseznami.dtos.SeznamDto;
 import si.fri.prpo.nakupovalniseznami.dtos.UporabnikDto;
+import si.fri.prpo.nakupovalniseznami.entitete.Izdelek;
 import si.fri.prpo.nakupovalniseznami.entitete.Seznam;
 import si.fri.prpo.nakupovalniseznami.entitete.Uporabnik;
 import si.fri.prpo.nakupovalniseznami.izjeme.NeveljavenSeznamException;
@@ -14,6 +16,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,6 +56,9 @@ public class UpravljanjeSeznamovZrno {
 
     @Inject
     private SeznamZrno seznamZrno;
+
+    @Inject
+    private IzdelekZrno izdelekZrno;
 
     @CountCalls
     public Seznam ustvariSeznam (SeznamDto seznamDto) {
@@ -108,6 +114,27 @@ public class UpravljanjeSeznamovZrno {
     public List<Seznam> pridobiSeznameUporabnika(Integer userId) {
         TypedQuery<Seznam> query = em.createNamedQuery("Seznam.getByUserId", Seznam.class).setParameter("id", userId);
         return query.getResultList();
+    }
+
+    @Transactional
+    public Integer deleteItemFromList(int seznamId, int izdelekId) {
+        Seznam seznam = seznamZrno.get(seznamId);
+        List<Izdelek> newItemList = new ArrayList<Izdelek>();
+
+        log.info("old ITEM LIST: " + seznam.getItems());
+
+        for (Izdelek item : seznam.getItems()) {
+            log.info("Looking at item: " + item.getName());
+            if (item.getId() != izdelekId)
+                newItemList.add(item);
+        }
+
+        seznam.setItems(newItemList);
+        log.info("new ITEM LIST: " + newItemList);
+        seznamZrno.update(seznamId, seznam);
+        izdelekZrno.delete(izdelekId);
+
+        return izdelekId;
     }
 
     private boolean preveriPolja(SeznamDto seznamDto) {

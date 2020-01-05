@@ -126,23 +126,23 @@ public class SeznamSource {
     }
 
     @DELETE
-    @Path("{id}")
+    @Path("{id}/izdelki/{idIzdelka}")
     @Operation(
-            summary = "Izbriši seznam",
+            summary = "Izbriši izdelek na seznamu",
             tags = "seznami",
             responses = {
                     @ApiResponse(
-                            description = "Identifikator izbrisanega seznama",
+                            description = "Identifikator izbrisanega izdelka",
                             content = @Content(mediaType = "text/plain")
                     )
             },
             description = "Izbriše seznam s podanim identifikatorjem"
     )
-    public Response deleteList(@PathParam("id") Integer seznamId) {
-        System.out.println("deleting seznam with id: " + seznamId);
+    public Response deleteItemOnList(@PathParam("id") Integer seznamId, @PathParam("idIzdelka") Integer izdelekId) {
+        System.out.println("deleting izdelek with id: " + izdelekId + " from seznam with id: " + seznamId);
         return Response
                 .status(Response.Status.OK)
-                .entity(seznamZrno.delete(seznamId))
+                .entity(upravljanjeSeznamovZrno.deleteItemFromList(seznamId, izdelekId))
                 .build();
     }
 
@@ -183,6 +183,27 @@ public class SeznamSource {
         return Response
                 .status(Response.Status.OK)
                 .entity(upravljanjeSeznamovZrno.poisciSeznamePoImenu(seznamDto))
+                .build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Operation(
+            summary = "Izbriši seznam",
+            tags = "seznami",
+            responses = {
+                    @ApiResponse(
+                            description = "Identifikator izbrisanega seznama",
+                            content = @Content(mediaType = "text/plain")
+                    )
+            },
+            description = "Izbriše seznam s podanim identifikatorjem"
+    )
+    public Response deleteList(@PathParam("id") Integer seznamId) {
+        System.out.println("deleting seznam with id: " + seznamId);
+        return Response
+                .status(Response.Status.OK)
+                .entity(seznamZrno.delete(seznamId))
                 .build();
     }
 

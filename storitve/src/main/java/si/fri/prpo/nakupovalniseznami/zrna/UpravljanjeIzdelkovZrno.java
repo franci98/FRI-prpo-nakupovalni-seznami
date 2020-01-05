@@ -62,12 +62,14 @@ public class UpravljanjeIzdelkovZrno {
         izdelek.setChecked(false);
         izdelek.setList(seznam);
 
-        izdelkiSeznama.add(izdelek);
+        Izdelek novIzdelek = izdelekZrno.create(izdelek);
+
+        izdelkiSeznama.add(novIzdelek);
         seznam.setItems(izdelkiSeznama);
 
         Seznam updatedSeznam = seznamZrno.update(seznam.getId(), seznam);
 
-        return izdelekZrno.create(izdelek);
+        return novIzdelek;
 
     }
 
