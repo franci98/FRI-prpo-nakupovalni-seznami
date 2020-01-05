@@ -92,10 +92,16 @@ public class SeznamZrno {
 
     @Transactional
     public Integer delete(int seznamId) {
-        Seznam uporabnik = em.find(Seznam.class, seznamId);
+        Seznam seznam = em.find(Seznam.class, seznamId);
 
-        if (uporabnik != null)
-            em.remove(uporabnik);
+        if (seznam != null) {
+            for (Izdelek izdelek : seznam.getItems()) {
+                if (izdelek != null)
+                    em.remove(izdelek);
+            }
+
+            em.remove(seznam);
+        }
 
         return seznamId;
     }
